@@ -1,0 +1,59 @@
+def Imputation():
+    import pandas as pd
+    import numpy as np
+    a=eval(input("Enter your data(dictionary): "))
+    d=pd.DataFrame(a)
+    print("Recheck Data.")
+    print(d)
+    while True:
+        b=input("Enter column which you want to fill: ")
+        if b in d.columns:
+            if d[b].dtype in ['float64','int64']:
+                d[b].fillna(d[b].mean(),inplace=True)
+            print("After Imputation")
+            print(d)
+            ques=input("Do you want to alter another column? (y/n) ")
+            if ques.lower()=='y':
+                True
+            else:
+                break
+        else:
+            print("Column Not Found. Try Again")
+            True
+    
+def OneHot():
+    import pandas as pd
+    import numpy as np
+    a=eval(input("Enter your data(dictionary): "))
+    d=pd.DataFrame(a)
+    print("Recheck Data.")
+    print(d)
+    b=input("Enter column to one-hot encode: ")
+    if b in d.columns:
+        print("Values in column.")
+        print(d[b])
+        unique=d[b].dropna().unique()
+        print("Unique sections: ", unique)
+        for i in unique:
+            d[f"{b}_{i}"] = np.where(d[b] == i, 1, 0)
+        print("Done.")
+        print(d)
+    else:
+        print("Column Not Found. Try Again")
+
+
+while True:
+    print("1. Ordinal Encoding.")
+    print("2. One-hot Encoding.")
+    print("3. Imputation.")
+    print("4. Exit.")
+    menu=int(input("Enter your choice: "))
+    if menu==1:
+        Ordinal_Encoder()
+    elif menu==2:
+        OneHot()
+    elif menu==3:
+        Imputation()
+    elif menu==4:
+        print("Exit.")
+        break
