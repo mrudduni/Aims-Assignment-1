@@ -1,0 +1,8 @@
+import pandas as pd
+d=pd.read_excel('Book1.xlsx')
+print("DataSET: ")
+print(d)
+mapping={"math":1,"science":2, "english":3}
+print('After Encoding:')
+d['encoding']=d['best sub'].map(mapping)
+print(d)
